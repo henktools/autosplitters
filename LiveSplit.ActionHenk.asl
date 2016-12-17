@@ -27,10 +27,10 @@ state("ActionHenk") {
   int boxing_betsy      : "ActionHenk.exe", 0x00A363D8, 0x770,  0x68, 0x3c8,  0xfc;
   int corporate_betsy   : "ActionHenk.exe", 0x00A363D8, 0x770,  0x68, 0x3c8,  0x34;
   // The Fever
-  int tornado           : "ActionHenk.exe", 0x00A364A4, 0x48c,  0x68, 0x1fc, 0x4f4;
-  int spaghetti         : "ActionHenk.exe", 0x00A364A4, 0x48c,  0x68, 0x1fc, 0x42c;
-  int boing             : "ActionHenk.exe", 0x00A364A4, 0x48c,  0x68, 0x1fc, 0x364;
-  int easy_peasy        : "ActionHenk.exe", 0x00A364A4, 0x48c,  0x68, 0x1fc, 0x29c;
+  int tornado           : "ActionHenk.exe", 0x00A364A4, 0x65c, 0x228,  0x14, 0x4f4;
+  int spaghetti         : "ActionHenk.exe", 0x00A364A4, 0x65c, 0x228,  0x14, 0x42c;
+  int boing             : "ActionHenk.exe", 0x00A364A4, 0x65c, 0x228,  0x14, 0x364;
+  int easy_peasy        : "ActionHenk.exe", 0x00A364A4, 0x65c, 0x228,  0x14, 0x29c;
   int party_hardy       : "ActionHenk.exe", 0x00A363E0, 0x76c,  0x70,  0xb8, 0x1c4;
   int neils_challenge   : "ActionHenk.exe", 0x00A363E0, 0x76c,  0x70,  0xb8,  0xfc;
   int gabber_betsy      : "ActionHenk.exe", 0x00A363E0, 0x76c,  0x70,  0xb8,  0x34;
@@ -76,18 +76,18 @@ state("ActionHenk") {
   int tribal_cedar      : "mono.dll",       0x001F20AC, 0x54c, 0x134,  0xb8,  0xfc;
   // Night Crisis
   int sick_burn         : "mono.dll",       0x001F20AC, 0x54c, 0x134,  0xb8,  0x34;
-  int full_stop         : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x8c, 0x534,  0x34;
-  int the_wall          : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x73c;
-  int spinebreaker      : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x674;
-  int pinball           : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x5ac;
-  int kentinator        : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x4e4;
-  int afronaut          : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x41c;
+  int full_stop         : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74,  0xb8,  0x34;
+  int the_wall          : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x73c;
+  int spinebreaker      : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x674;
+  int pinball           : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x5ac;
+  int kentinator        : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x4e4;
+  int afronaut          : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x41c;
   // Back to the City
-  int transition_kings  : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x354;
-  int hardcore_hooks    : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x28c;
-  int hi_speed_hysteria : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c, 0x1c4;
-  int ultimate_test     : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c,  0xfc;
-  int way_of_the_ninja  : "ActionHenk.exe", 0x00A2FBB0, 0x154, 0x644, 0x67c,  0x34;
+  int transition_kings  : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x354;
+  int hardcore_hooks    : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x28c;
+  int hi_speed_hysteria : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4, 0x1c4;
+  int ultimate_test     : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4,  0xfc;
+  int way_of_the_ninja  : "ActionHenk.exe", 0x00A2FBB0, 0x154,  0x74, 0x7c4,  0x34;
   int nineties_henk     : "mono.dll",       0x001f20ac, 0x2ac, 0x524, 0x2c8, 0x73c;
   int action_hank       : "mono.dll",       0x001f20ac, 0x2ac, 0x524, 0x2c8, 0x674;
   // All I Want for Henkmas
@@ -175,13 +175,13 @@ update {
     old.the_highway + old.back_and_forth + old.slidey_slidey + old.bumper_jumper + old.the_zigzag;
 
   // Determine the total number of medals the player has now earned in the current interval.
-  vars.new_sum_of_medals = current.hello_world + current.buttslide_basics + current.loop_of_density + current.back_2_back + current.hot_feet + 
+  vars.new_sum_of_medals = current.hello_world + current.buttslide_basics + current.loop_of_density + current.back_2_back + current.hot_feet +
     current.the_classic + current.sweet_flow + current.multipath + current.pro_skater + current.wall_tricks +
     current.tornado + current.spaghetti + current.boing + current.easy_peasy + current.party_hardy +
     current.getting_hooked + current.smooth_swinging + current.halfway_hook + current.the_drop + current.close_call +
     current.gotta_ghost_fast + current.wicked_waves + current.cursed_curves + current.deadly_drops + current.tricks_treats +
-    current.rise_n_shine + current.pipe_n_slide + current.quick_tricks + current.wave_rider + current.down_the_tube + 
-    current.deep_dive + current.the_plunger + current.the_big_climb + current.sad_snails + current.leap_of_faith + 
+    current.rise_n_shine + current.pipe_n_slide + current.quick_tricks + current.wave_rider + current.down_the_tube +
+    current.deep_dive + current.the_plunger + current.the_big_climb + current.sad_snails + current.leap_of_faith +
     current.full_swing_ahead + current.hook_maze + current.throwback + current.flappy_swing + current.right_round_baby +
     current.sick_burn + current.full_stop + current.the_wall + current.spinebreaker + current.pinball +
     current.transition_kings + current.hardcore_hooks + current.hi_speed_hysteria + current.ultimate_test + current.way_of_the_ninja +
@@ -207,13 +207,11 @@ reset {
 }
 
 isLoading {
-  if(settings["load_removal"]) {
-    // We want to ignore time spent loading and in cutscenes, as well as any
-    // network-based latency, such as submitting scores to the Steam leaderboards
-    // when on the post game screen.
-    return
-      current.game_state == vars.state_loading ||
-      current.game_state == vars.state_cutscene ||
-      current.game_state == vars.state_post_game;
-  }
+  // We want to ignore time spent loading and in cutscenes, as well as any
+  // network-based latency, such as submitting scores to the Steam leaderboards
+  // when on the post game screen.
+  return
+    current.game_state == vars.state_loading ||
+    current.game_state == vars.state_cutscene ||
+    current.game_state == vars.state_post_game;
 }
