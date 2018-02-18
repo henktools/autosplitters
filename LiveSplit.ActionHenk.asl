@@ -146,6 +146,9 @@ split {
     if(vars.old_sum_of_medals < 57) return vars.new_sum_of_medals >= 57;
     if(vars.old_sum_of_medals < 72) return vars.new_sum_of_medals >= 72;
     if(vars.old_sum_of_medals < 85) return vars.new_sum_of_medals >= 85;
+    if(vars.old_sum_of_medals >= 85 &&
+       current.kentinator == 1 &&
+       old.kentinator == 0) return true;
 
     // The run is finished when the player has beaten Kentinator and finished
     // playing the Credits level. The split should only occur when on the post
