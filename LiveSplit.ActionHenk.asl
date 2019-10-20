@@ -100,6 +100,11 @@ state("ActionHenk") {
   int henkdolph         : "mono.dll",       0x001f20ac, 0x2ac, 0x524, 0x2c8,  0xfc;
   // Credits - currently unused, because the credits level does not reward a medal.
   int credits           : "mono.dll",       0x001f20ac, 0x2ac, 0x524, 0x2c8,  0x34;
+
+  // Value found by badBlackShark
+
+  // The amount of resets per session. Only works when using the full reset key (B, Circle or Backspace)
+  int resets            : "ActionHenk.exe", 0x00a304d8,  0x1c, 0x764,  0x14, 0x360, 0x5bc;
 }
 
 startup {
@@ -109,6 +114,48 @@ startup {
   // load removal
   settings.Add("load_removal", false, "Load Removal");
   settings.SetToolTip("load_removal", "Load Removal pauses the timer during load times, cutscenes, and the post-game menus.");
+  // Reset tracking
+  settings.Add("reset_tracking", false, "Reset Tracking");
+  settings.SetToolTip("reset_tracking", "Tracks the amount of times you reset during an attempt. Only works when using the full reset, not checkpoint reset, key.");
+
+  // Things for the reset tracker
+
+  // Variables
+  vars.text_reset_tracker = null;
+  vars.resets_per_run     = 0;
+
+  vars.update_reset_tracker = (Action)(() => {
+      if(vars.text_reset_tracker == null) {
+          foreach (dynamic component in timer.Layout.Components) {
+              if (component.GetType().Name != "TextComponent") continue;
+
+              if (component.Settings.Text1 == "Resets This Run:") {
+                  vars.text_reset_tracker = component.Settings;
+                  break;
+              }
+          }
+
+          if(vars.text_reset_tracker == null) {
+              vars.text_reset_tracker = vars.create_text_component("Resets This Run:");
+          }
+      }
+
+      vars.text_reset_tracker.Text2 = vars.resets_per_run.ToString();
+  });
+
+  vars.create_text_component = (Func<string, dynamic>)((name) => {
+      var text_component_assembly   = Assembly.LoadFrom("Components\\LiveSplit.Text.dll");
+      dynamic text_component        = Activator.CreateInstance(text_component_assembly.GetType("LiveSplit.UI.Components.TextComponent"), timer);
+      timer.Layout.LayoutComponents.Add(new LiveSplit.UI.Components.LayoutComponent("LiveSplit.Text.dll", text_component as LiveSplit.UI.Components.IComponent));
+      text_component.Settings.Text1 = name;
+      return text_component.Settings;
+  });
+
+  vars.reset_vars = (EventHandler)((s, e) => {
+      vars.resets_per_run = 0;
+      vars.update_reset_tracker();
+  });
+  timer.OnStart += vars.reset_vars;
 }
 
 init {
@@ -189,6 +236,11 @@ update {
     current.sick_burn + current.full_stop + current.the_wall + current.spinebreaker + current.pinball +
     current.transition_kings + current.hardcore_hooks + current.hi_speed_hysteria + current.ultimate_test + current.way_of_the_ninja +
     current.the_highway + current.back_and_forth + current.slidey_slidey + current.bumper_jumper + current.the_zigzag;
+
+  if(settings["reset_tracking"] && old.resets < current.resets) {
+    vars.resets_per_run += 1;
+    vars.update_reset_tracker();
+  }
 
   return true;
 }
