@@ -239,7 +239,7 @@ update {
 
   if(settings["reset_tracking"] && old.resets < current.resets) {
     vars.resets_per_run += 1;
-    vars.update_reset_tracker();1
+    vars.update_reset_tracker();
   }
 
   return true;
