@@ -213,17 +213,7 @@ split {
   }
   else if(settings["category_all_levels"]) {
     // Splits are based on the number of batches marked as complete
-    return vars.old_batches_completed == 0  && vars.new_batches_completed == 1  ||
-           vars.old_batches_completed == 1  && vars.new_batches_completed == 2  ||
-           vars.old_batches_completed == 2  && vars.new_batches_completed == 3  ||
-           vars.old_batches_completed == 3  && vars.new_batches_completed == 4  ||
-           vars.old_batches_completed == 4  && vars.new_batches_completed == 5  ||
-           vars.old_batches_completed == 5  && vars.new_batches_completed == 6  ||
-           vars.old_batches_completed == 6  && vars.new_batches_completed == 7  ||
-           vars.old_batches_completed == 7  && vars.new_batches_completed == 8  ||
-           vars.old_batches_completed == 8  && vars.new_batches_completed == 9  ||
-           vars.old_batches_completed == 9  && vars.new_batches_completed == 10 ||
-           vars.old_batches_completed == 10 && vars.new_batches_completed == 11;
+    return vars.new_batches_completed == vars.old_batches_completed + 1;
   }
 
   // If none of the above conditions have been met, do not split.
