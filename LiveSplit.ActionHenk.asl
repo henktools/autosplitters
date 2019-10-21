@@ -111,6 +111,9 @@ startup {
   // Any% splitting
   settings.Add("category_any", true, "Any% Splitting");
   settings.SetToolTip("category_any", "Full auto-splitting for Any% runs.");
+  // All Levels splitting
+  settings.Add("category_all_levels", false, "All Levels Splitting");
+  settings.SetToolTip("category_all_levels", "Full auto-splitting for All Levels runs.");
   // load removal
   settings.Add("load_removal", false, "Load Removal");
   settings.SetToolTip("load_removal", "Load Removal pauses the timer during load times, cutscenes, and the post-game menus.");
@@ -160,19 +163,22 @@ startup {
 
 init {
   // Number of medals the player had/has earned.
-  vars.old_sum_of_medals = 0;
-  vars.new_sum_of_medals = 0;
+  vars.old_sum_of_medals     = 0;
+  vars.new_sum_of_medals     = 0;
+  // Number of batches the player had/has completed (counts if all normal levels are completed with at least bronze).
+  vars.old_batches_completed = 0;
+  vars.new_batches_completed = 0;
   // Level ID for checking when the credits have been completed.
-  vars.credits_level_id = 97;
+  vars.credits_level_id      = 97;
   // Values of the GUIScreens enum used to indicate which state is currently active.
-  vars.state_main_menu        =  1;
-  vars.state_loading          =  5;
-  vars.state_cutscene         = 11; // Actually GUIScreen_None.
-  vars.state_post_game        = 10;
-  vars.state_batch_selection  = 37;
-  vars.state_level_selection  = 14;
+  vars.state_main_menu       =  1;
+  vars.state_loading         =  5;
+  vars.state_cutscene        = 11; // Actually GUIScreen_None.
+  vars.state_post_game       = 10;
+  vars.state_batch_selection = 37;
+  vars.state_level_selection = 14;
   // Doesn't seem to always get set when the credits roll.
-  vars.state_credits          = 12;
+  vars.state_credits         = 12;
 
   // Enforce the current comparison to be against Game Time instead of Real Time.
   // timer.CurrentComparison != IGT: timer.currentComparison = IGT;
@@ -205,6 +211,10 @@ split {
         current.last_level == vars.credits_level_id &&
         current.game_state == vars.state_post_game) return true;
   }
+  else if(settings["category_all_levels"]) {
+    // Splits are based on the number of batches marked as complete
+    return vars.new_batches_completed == vars.old_batches_completed + 1;
+  }
 
   // If none of the above conditions have been met, do not split.
   return false;
@@ -236,6 +246,22 @@ update {
     current.sick_burn + current.full_stop + current.the_wall + current.spinebreaker + current.pinball +
     current.transition_kings + current.hardcore_hooks + current.hi_speed_hysteria + current.ultimate_test + current.way_of_the_ninja +
     current.the_highway + current.back_and_forth + current.slidey_slidey + current.bumper_jumper + current.the_zigzag;
+
+  // The old new is the new old.
+  vars.old_batches_completed = vars.new_batches_completed;
+
+  // A batch is complete if each level in the batch was completed with at least the bronze medal.
+  vars.new_batches_completed = ((old.hello_world      > 0 && old.buttslide_basics > 0 && old.loop_of_density   > 0 && old.back_2_back   > 0 && old.hot_feet         > 0) ? 1 : 0) + 
+                               ((old.the_classic      > 0 && old.sweet_flow       > 0 && old.multipath         > 0 && old.pro_skater    > 0 && old.wall_tricks      > 0) ? 1 : 0) +
+                               ((old.tornado          > 0 && old.spaghetti        > 0 && old.boing             > 0 && old.easy_peasy    > 0 && old.party_hardy      > 0) ? 1 : 0) +
+                               ((old.getting_hooked   > 0 && old.smooth_swinging  > 0 && old.halfway_hook      > 0 && old.the_drop      > 0 && old.close_call       > 0) ? 1 : 0) +
+                               ((old.gotta_ghost_fast > 0 && old.wicked_waves     > 0 && old.cursed_curves     > 0 && old.deadly_drops  > 0 && old.tricks_treats    > 0) ? 1 : 0) +
+                               ((old.rise_n_shine     > 0 && old.pipe_n_slide     > 0 && old.quick_tricks      > 0 && old.wave_rider    > 0 && old.down_the_tube    > 0) ? 1 : 0) +
+                               ((old.deep_dive        > 0 && old.the_plunger      > 0 && old.the_big_climb     > 0 && old.sad_snails    > 0 && old.leap_of_faith    > 0) ? 1 : 0) +
+                               ((old.full_swing_ahead > 0 && old.hook_maze        > 0 && old.throwback         > 0 && old.flappy_swing  > 0 && old.right_round_baby > 0) ? 1 : 0) +
+                               ((old.sick_burn        > 0 && old.full_stop        > 0 && old.the_wall          > 0 && old.spinebreaker  > 0 && old.pinball          > 0) ? 1 : 0) +
+                               ((old.transition_kings > 0 && old.hardcore_hooks   > 0 && old.hi_speed_hysteria > 0 && old.ultimate_test > 0 && old.way_of_the_ninja > 0) ? 1 : 0) +
+                               ((old.the_highway      > 0 && old.back_and_forth   > 0 && old.slidey_slidey     > 0 && old.bumper_jumper > 0 && old.the_zigzag       > 0) ? 1 : 0);
 
   if(settings["reset_tracking"] && old.resets < current.resets) {
     vars.resets_per_run += 1;
