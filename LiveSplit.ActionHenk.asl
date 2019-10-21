@@ -104,7 +104,7 @@ state("ActionHenk") {
   // Value found by badBlackShark
 
   // The amount of resets per session. Only works when using the full reset key (B, Circle or Backspace)
-  int resets            : "ActionHenk.exe", 0x00a304d8,  0x1c, 0x764,  0x14, 0x360, 0x5bc;
+  int resets            : "ActionHenk.exe", 0x00a304f4,  0x34, 0x764,  0x14, 0x5a8, 0x594;
 }
 
 startup {
@@ -240,17 +240,7 @@ split {
 
 update {
   // Determine the total number of medals the player had earned in the last interval.
-  vars.old_sum_of_medals = old.hello_world + old.buttslide_basics + old.loop_of_density + old.back_2_back + old.hot_feet +
-    old.the_classic + old.sweet_flow + old.multipath + old.pro_skater + old.wall_tricks +
-    old.tornado + old.spaghetti + old.boing + old.easy_peasy + old.party_hardy +
-    old.getting_hooked + old.smooth_swinging + old.halfway_hook + old.the_drop + old.close_call +
-    old.gotta_ghost_fast + old.wicked_waves + old.cursed_curves + old.deadly_drops + old.tricks_treats +
-    old.rise_n_shine + old.pipe_n_slide + old.quick_tricks + old.wave_rider + old.down_the_tube +
-    old.deep_dive + old.the_plunger + old.the_big_climb + old.sad_snails + old.leap_of_faith +
-    old.full_swing_ahead + old.hook_maze + old.throwback + old.flappy_swing + old.right_round_baby +
-    old.sick_burn + old.full_stop + old.the_wall + old.spinebreaker + old.pinball +
-    old.transition_kings + old.hardcore_hooks + old.hi_speed_hysteria + old.ultimate_test + old.way_of_the_ninja +
-    old.the_highway + old.back_and_forth + old.slidey_slidey + old.bumper_jumper + old.the_zigzag;
+  vars.old_sum_of_medals = vars.new_sum_of_medals;
 
   // Determine the total number of medals the player has now earned in the current interval.
   vars.new_sum_of_medals = current.hello_world + current.buttslide_basics + current.loop_of_density + current.back_2_back + current.hot_feet +
@@ -269,33 +259,33 @@ update {
   vars.old_batches_completed = vars.new_batches_completed;
 
   // A batch is complete if each level in the batch was completed with at least the bronze medal.
-  vars.new_batches_completed = ((old.hello_world      > 0 && old.buttslide_basics > 0 && old.loop_of_density   > 0 && old.back_2_back   > 0 && old.hot_feet         > 0) ? 1 : 0) + 
-                               ((old.the_classic      > 0 && old.sweet_flow       > 0 && old.multipath         > 0 && old.pro_skater    > 0 && old.wall_tricks      > 0) ? 1 : 0) +
-                               ((old.tornado          > 0 && old.spaghetti        > 0 && old.boing             > 0 && old.easy_peasy    > 0 && old.party_hardy      > 0) ? 1 : 0) +
-                               ((old.getting_hooked   > 0 && old.smooth_swinging  > 0 && old.halfway_hook      > 0 && old.the_drop      > 0 && old.close_call       > 0) ? 1 : 0) +
-                               ((old.gotta_ghost_fast > 0 && old.wicked_waves     > 0 && old.cursed_curves     > 0 && old.deadly_drops  > 0 && old.tricks_treats    > 0) ? 1 : 0) +
-                               ((old.rise_n_shine     > 0 && old.pipe_n_slide     > 0 && old.quick_tricks      > 0 && old.wave_rider    > 0 && old.down_the_tube    > 0) ? 1 : 0) +
-                               ((old.deep_dive        > 0 && old.the_plunger      > 0 && old.the_big_climb     > 0 && old.sad_snails    > 0 && old.leap_of_faith    > 0) ? 1 : 0) +
-                               ((old.full_swing_ahead > 0 && old.hook_maze        > 0 && old.throwback         > 0 && old.flappy_swing  > 0 && old.right_round_baby > 0) ? 1 : 0) +
-                               ((old.sick_burn        > 0 && old.full_stop        > 0 && old.the_wall          > 0 && old.spinebreaker  > 0 && old.pinball          > 0) ? 1 : 0) +
-                               ((old.transition_kings > 0 && old.hardcore_hooks   > 0 && old.hi_speed_hysteria > 0 && old.ultimate_test > 0 && old.way_of_the_ninja > 0) ? 1 : 0) +
-                               ((old.the_highway      > 0 && old.back_and_forth   > 0 && old.slidey_slidey     > 0 && old.bumper_jumper > 0 && old.the_zigzag       > 0) ? 1 : 0);
+  vars.new_batches_completed = ((old.hello_world      > 0 && old.buttslide_basics > 0 && old.loop_of_density   > 0 && old.back_2_back   > 0 && old.hot_feet         > 0)                        ? 1 : 0) + 
+                               ((old.the_classic      > 0 && old.sweet_flow       > 0 && old.multipath         > 0 && old.pro_skater    > 0 && old.wall_tricks      > 0)                        ? 1 : 0) +
+                               ((old.tornado          > 0 && old.spaghetti        > 0 && old.boing             > 0 && old.easy_peasy    > 0 && old.party_hardy      > 0)                        ? 1 : 0) +
+                               ((old.getting_hooked   > 0 && old.smooth_swinging  > 0 && old.halfway_hook      > 0 && old.the_drop      > 0 && old.close_call       > 0)                        ? 1 : 0) +
+                               ((old.gotta_ghost_fast > 0 && old.wicked_waves     > 0 && old.cursed_curves     > 0 && old.deadly_drops  > 0 && old.tricks_treats    > 0 && old.kentony == 1)    ? 1 : 0) +
+                               ((old.rise_n_shine     > 0 && old.pipe_n_slide     > 0 && old.quick_tricks      > 0 && old.wave_rider    > 0 && old.down_the_tube    > 0)                        ? 1 : 0) +
+                               ((old.deep_dive        > 0 && old.the_plunger      > 0 && old.the_big_climb     > 0 && old.sad_snails    > 0 && old.leap_of_faith    > 0)                        ? 1 : 0) +
+                               ((old.full_swing_ahead > 0 && old.hook_maze        > 0 && old.throwback         > 0 && old.flappy_swing  > 0 && old.right_round_baby > 0)                        ? 1 : 0) +
+                               ((old.sick_burn        > 0 && old.full_stop        > 0 && old.the_wall          > 0 && old.spinebreaker  > 0 && old.pinball          > 0 && old.kentinator == 1) ? 1 : 0) +
+                               ((old.transition_kings > 0 && old.hardcore_hooks   > 0 && old.hi_speed_hysteria > 0 && old.ultimate_test > 0 && old.way_of_the_ninja > 0)                        ? 1 : 0) +
+                               ((old.the_highway      > 0 && old.back_and_forth   > 0 && old.slidey_slidey     > 0 && old.bumper_jumper > 0 && old.the_zigzag       > 0)                        ? 1 : 0);
 
   // The old new is the new old.
   vars.old_perfect_batches   = vars.new_perfect_batches;
 
   // A batch is perfect if each level in the batch was completed with the rainbow medal.
-  vars.new_perfect_batches   = ((old.hello_world      == 4 && old.buttslide_basics == 4 && old.loop_of_density   == 4 && old.back_2_back   == 4 && old.hot_feet         == 4) ? 1 : 0) + 
-                               ((old.the_classic      == 4 && old.sweet_flow       == 4 && old.multipath         == 4 && old.pro_skater    == 4 && old.wall_tricks      == 4) ? 1 : 0) +
-                               ((old.tornado          == 4 && old.spaghetti        == 4 && old.boing             == 4 && old.easy_peasy    == 4 && old.party_hardy      == 4) ? 1 : 0) +
-                               ((old.getting_hooked   == 4 && old.smooth_swinging  == 4 && old.halfway_hook      == 4 && old.the_drop      == 4 && old.close_call       == 4) ? 1 : 0) +
-                               ((old.gotta_ghost_fast == 4 && old.wicked_waves     == 4 && old.cursed_curves     == 4 && old.deadly_drops  == 4 && old.tricks_treats    == 4) ? 1 : 0) +
-                               ((old.rise_n_shine     == 4 && old.pipe_n_slide     == 4 && old.quick_tricks      == 4 && old.wave_rider    == 4 && old.down_the_tube    == 4) ? 1 : 0) +
-                               ((old.deep_dive        == 4 && old.the_plunger      == 4 && old.the_big_climb     == 4 && old.sad_snails    == 4 && old.leap_of_faith    == 4) ? 1 : 0) +
-                               ((old.full_swing_ahead == 4 && old.hook_maze        == 4 && old.throwback         == 4 && old.flappy_swing  == 4 && old.right_round_baby == 4) ? 1 : 0) +
-                               ((old.sick_burn        == 4 && old.full_stop        == 4 && old.the_wall          == 4 && old.spinebreaker  == 4 && old.pinball          == 4) ? 1 : 0) +
-                               ((old.transition_kings == 4 && old.hardcore_hooks   == 4 && old.hi_speed_hysteria == 4 && old.ultimate_test == 4 && old.way_of_the_ninja == 4) ? 1 : 0) +
-                               ((old.the_highway      == 4 && old.back_and_forth   == 4 && old.slidey_slidey     == 4 && old.bumper_jumper == 4 && old.the_zigzag       == 4) ? 1 : 0);
+  vars.new_perfect_batches   = ((old.hello_world      == 4 && old.buttslide_basics == 4 && old.loop_of_density   == 4 && old.back_2_back   == 4 && old.hot_feet         == 4)                        ? 1 : 0) + 
+                               ((old.the_classic      == 4 && old.sweet_flow       == 4 && old.multipath         == 4 && old.pro_skater    == 4 && old.wall_tricks      == 4)                        ? 1 : 0) +
+                               ((old.tornado          == 4 && old.spaghetti        == 4 && old.boing             == 4 && old.easy_peasy    == 4 && old.party_hardy      == 4)                        ? 1 : 0) +
+                               ((old.getting_hooked   == 4 && old.smooth_swinging  == 4 && old.halfway_hook      == 4 && old.the_drop      == 4 && old.close_call       == 4)                        ? 1 : 0) +
+                               ((old.gotta_ghost_fast == 4 && old.wicked_waves     == 4 && old.cursed_curves     == 4 && old.deadly_drops  == 4 && old.tricks_treats    == 4 && old.kentony == 1)    ? 1 : 0) +
+                               ((old.rise_n_shine     == 4 && old.pipe_n_slide     == 4 && old.quick_tricks      == 4 && old.wave_rider    == 4 && old.down_the_tube    == 4)                        ? 1 : 0) +
+                               ((old.deep_dive        == 4 && old.the_plunger      == 4 && old.the_big_climb     == 4 && old.sad_snails    == 4 && old.leap_of_faith    == 4)                        ? 1 : 0) +
+                               ((old.full_swing_ahead == 4 && old.hook_maze        == 4 && old.throwback         == 4 && old.flappy_swing  == 4 && old.right_round_baby == 4)                        ? 1 : 0) +
+                               ((old.sick_burn        == 4 && old.full_stop        == 4 && old.the_wall          == 4 && old.spinebreaker  == 4 && old.pinball          == 4 && old.kentinator == 1) ? 1 : 0) +
+                               ((old.transition_kings == 4 && old.hardcore_hooks   == 4 && old.hi_speed_hysteria == 4 && old.ultimate_test == 4 && old.way_of_the_ninja == 4)                        ? 1 : 0) +
+                               ((old.the_highway      == 4 && old.back_and_forth   == 4 && old.slidey_slidey     == 4 && old.bumper_jumper == 4 && old.the_zigzag       == 4)                        ? 1 : 0);
 
   // The old new is the new old.
   vars.old_full_batches      = vars.new_full_batches;
