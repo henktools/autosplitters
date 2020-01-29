@@ -118,6 +118,7 @@ startup {
   // load removal
   settings.Add("load_removal", false, "Load Removal");
   settings.SetToolTip("load_removal", "Load Removal pauses the timer during load times, cutscenes, and the post-game menus.");
+}
 
 init {
   // Number of medals the player had/has earned.
